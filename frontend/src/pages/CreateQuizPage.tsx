@@ -105,7 +105,6 @@ function CreateQuizPage() {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-        {/* Title Section */}
         <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
           <label className="block text-sm font-semibold text-gray-900">
             Quiz Title <span className="text-red-500">*</span>
@@ -127,7 +126,6 @@ function CreateQuizPage() {
           )}
         </div>
 
-        {/* Questions Section */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold text-gray-900">Questions</h2>
@@ -163,7 +161,6 @@ function CreateQuizPage() {
           </div>
         </div>
 
-        {/* Form Actions */}
         <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-200">
           <Link
             to="/quizzes"
