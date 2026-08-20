@@ -132,6 +132,7 @@ dist
 # Prisma
 backend/prisma/*.db
 backend/prisma/*.db-journal
+dev.db
 
 # AI / Debugging
 .ai/
