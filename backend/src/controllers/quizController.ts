@@ -1,23 +1,24 @@
 import { Request, Response } from 'express';
 import * as quizService from '../services/quizService';
+import { quizSchema } from '../validators/quizValidator';
+import { z } from 'zod';
 
 export const createQuiz = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
   try {
-    if (
-      !req.body.title ||
-      !req.body.questions ||
-      !Array.isArray(req.body.questions)
-    ) {
-      res.status(400).json({ error: 'Title and questions array are required' });
-      return;
-    }
+    const validatedData = quizSchema.parse(req.body);
 
-    const quiz = await quizService.createQuiz(req.body);
+    const quiz = await quizService.createQuiz(validatedData);
     res.status(201).json(quiz);
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      res
+        .status(400)
+        .json({ error: 'Validation failed', details: error.issues });
+      return;
+    }
     console.error('Error creating quiz:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
