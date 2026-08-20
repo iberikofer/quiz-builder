@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { Quiz, QuizListItem, CreateQuizPayload } from '../types/quiz';
 
 const api = axios.create({
-  baseURL: '/quizzes',
+  baseURL: '/api/quizzes',
 });
 
 export const getQuizzes = async (): Promise<QuizListItem[]> => {
