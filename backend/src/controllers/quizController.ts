@@ -42,7 +42,7 @@ export const getQuizById = async (
 ): Promise<void> => {
   try {
     const id = parseInt(req.params.id as string, 10);
-    if (isNaN(id)) {
+    if (Number.isNaN(id)) {
       res.status(400).json({ error: 'Invalid ID format' });
       return;
     }
@@ -56,6 +56,38 @@ export const getQuizById = async (
     res.status(200).json(quiz);
   } catch (error) {
     console.error('Error getting quiz by id:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+export const deleteQuiz = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  try {
+    const id = parseInt(req.params.id as string, 10);
+    if (Number.isNaN(id)) {
+      res.status(400).json({ error: 'Invalid ID format' });
+      return;
+    }
+
+    try {
+      await quizService.deleteQuiz(id);
+      res.status(204).send();
+    } catch (e: unknown) {
+      if (
+        typeof e === 'object' &&
+        e !== null &&
+        'code' in e &&
+        (e as Record<string, unknown>).code === 'P2025'
+      ) {
+        res.status(404).json({ error: 'Quiz not found' });
+      } else {
+        throw e;
+      }
+    }
+  } catch (error) {
+    console.error('Error deleting quiz:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };

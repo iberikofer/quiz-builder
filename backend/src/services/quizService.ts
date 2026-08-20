@@ -78,3 +78,9 @@ export const getQuizById = async (id: number) => {
     },
   });
 };
+
+export const deleteQuiz = async (id: number) => {
+  return await prisma.quiz.delete({
+    where: { id },
+  });
+};
