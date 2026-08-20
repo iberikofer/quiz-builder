@@ -17,10 +17,10 @@ model Question {
   id            Int      @id @default(autoincrement())
   quizId        Int
   quiz          Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
-  type          String   // "boolean", "input", "checkbox"
+  type          String
   text          String
   order         Int
-  correctAnswer String?  // For Boolean/Input
+  correctAnswer String?
   options       Option[]
 }
 

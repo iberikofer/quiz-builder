@@ -44,3 +44,37 @@ export const createQuiz = async (data: CreateQuizDTO) => {
     },
   });
 };
+
+export const getQuizzes = async () => {
+  const quizzes = await prisma.quiz.findMany({
+    include: {
+      _count: {
+        select: { questions: true },
+      },
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
+
+  return quizzes.map((quiz) => ({
+    id: quiz.id,
+    title: quiz.title,
+    createdAt: quiz.createdAt,
+    questionCount: quiz._count.questions,
+  }));
+};
+
+export const getQuizById = async (id: number) => {
+  return await prisma.quiz.findUnique({
+    where: { id },
+    include: {
+      questions: {
+        orderBy: { order: 'asc' },
+        include: {
+          options: true,
+        },
+      },
+    },
+  });
+};
