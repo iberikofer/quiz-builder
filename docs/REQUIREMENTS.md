@@ -118,7 +118,5 @@ quiz-builder/
 │       ├── services/      # API client wrappers
 │       ├── types/         # TypeScript definitions
 │       └── validators/    # Form schemas
-├── docs/                  # Project documentation & requirements
-│   └── REQUIREMENTS.md
 └── README.md
 ```
