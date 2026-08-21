@@ -2,6 +2,8 @@
 
 A modern, full-stack Quiz Builder application built with **React**, **TypeScript**, **Express**, and **Prisma**.
 
+> 📄 **Technical Specification**: Check out the full [Task Requirements](docs/REQUIREMENTS.md).
+
 ---
 
 ## 🌟 Overview
@@ -56,6 +58,8 @@ quiz-builder/
 │       ├── services/      # Axios API service
 │       ├── types/         # TypeScript interfaces
 │       └── validators/    # Client-side form schemas
+├── docs/                  # 📄 Project documentation
+│   └── REQUIREMENTS.md
 └── README.md
 ```
 
