@@ -150,7 +150,7 @@ We recommend **[Neon.tech](https://neon.tech/)** (free, never expires, fast serv
    - **Name**: `quiz-builder-api`
    - **Root Directory**: `server`
    - **Runtime**: `Node`
-   - **Build Command**: `npm install && npx prisma generate && npx prisma db push && npm run seed && npm run build`
+   - **Build Command**: `npm install && npx prisma generate && npx prisma db push && npm run build`
    - **Start Command**: `npm start`
    - **Health Check Path**: `/health`
 5. In **Environment Variables**, add:
