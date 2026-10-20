@@ -1,0 +1,13 @@
+export { SearchIcon } from './SearchIcon';
+export { PlusIcon } from './PlusIcon';
+export { ClipboardCheckIcon } from './ClipboardCheckIcon';
+export { TrashIcon } from './TrashIcon';
+export { CalendarIcon } from './CalendarIcon';
+export { EmptyQuizIcon } from './EmptyQuizIcon';
+export { CheckIcon } from './CheckIcon';
+export { CheckCircleIcon } from './CheckCircleIcon';
+export { LinesIcon } from './LinesIcon';
+export { CloseCircleIcon } from './CloseCircleIcon';
+export { DocumentListIcon } from './DocumentListIcon';
+export { GridBlocksIcon } from './GridBlocksIcon';
+export { ShieldCheckIcon } from './ShieldCheckIcon';
