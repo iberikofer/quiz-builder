@@ -26,7 +26,7 @@ function QuizCard({ quiz, onDelete }: QuizCardProps) {
   return (
     <div
       onClick={() => navigate(`/quizzes/${quiz.id}`)}
-      className="group relative flex cursor-pointer flex-col justify-between rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md"
+      className="group relative flex cursor-pointer flex-col justify-between rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 ease-out transform-gpu hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md after:absolute after:inset-x-0 after:-bottom-2 after:h-2 after:content-['']"
     >
       <div>
         <div className="flex items-start justify-between gap-3">

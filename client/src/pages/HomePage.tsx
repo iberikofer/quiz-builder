@@ -60,7 +60,7 @@ function HomePage() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="group relative rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md sm:p-6">
+          <div className="group relative rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 ease-out transform-gpu hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md after:absolute after:inset-x-0 after:-bottom-2 after:h-2 after:content-[''] sm:p-6">
             <div className="mb-3.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
               <DocumentListIcon className="h-5 w-5" />
             </div>
@@ -74,7 +74,7 @@ function HomePage() {
             </p>
           </div>
 
-          <div className="group relative rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-md sm:p-6">
+          <div className="group relative rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 ease-out transform-gpu hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-md after:absolute after:inset-x-0 after:-bottom-2 after:h-2 after:content-[''] sm:p-6">
             <div className="mb-3.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 transition-colors group-hover:bg-indigo-600 group-hover:text-white">
               <GridBlocksIcon className="h-5 w-5" />
             </div>
@@ -88,7 +88,7 @@ function HomePage() {
             </p>
           </div>
 
-          <div className="group relative rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md sm:col-span-2 sm:p-6 lg:col-span-1">
+          <div className="group relative rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 ease-out transform-gpu hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md after:absolute after:inset-x-0 after:-bottom-2 after:h-2 after:content-[''] sm:col-span-2 sm:p-6 lg:col-span-1">
             <div className="mb-3.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600 transition-colors group-hover:bg-emerald-600 group-hover:text-white">
               <ShieldCheckIcon className="h-5 w-5" />
             </div>
