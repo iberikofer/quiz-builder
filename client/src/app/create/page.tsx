@@ -92,16 +92,16 @@ export default function CreateQuizPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+          <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-3xl">
             Create New Quiz
           </h1>
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 sm:text-sm">
             Design your quiz questions and configure correct answers
           </p>
         </div>
         <Link
           href="/quizzes"
-          className="text-sm font-medium text-gray-500 transition-colors hover:text-gray-900"
+          className="text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
         >
           &larr; Back to Quizzes
         </Link>
@@ -109,10 +109,10 @@ export default function CreateQuizPage() {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Quiz Title */}
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900 sm:p-6">
           <label
             htmlFor="title"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
           >
             Quiz Title <span className="text-red-500">*</span>
           </label>
@@ -121,14 +121,14 @@ export default function CreateQuizPage() {
             type="text"
             placeholder="e.g. JavaScript Core Concepts"
             {...register('title')}
-            className={`mt-2 block w-full rounded-lg border px-4 py-2.5 text-sm transition focus:outline-none focus:ring-2 ${
+            className={`mt-2 block w-full rounded-md border px-4 py-2.5 text-sm transition focus:outline-none focus:ring-2 dark:border-gray-700 dark:bg-gray-800 dark:text-white ${
               errors.title
-                ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'
+                ? 'border-red-300 focus:border-red-500 focus:ring-red-200 dark:border-red-800'
+                : 'border-gray-300 focus:border-mint-500 focus:ring-mint-200 dark:focus:ring-mint-900'
             }`}
           />
           {errors.title && (
-            <p className="mt-1.5 text-xs text-red-600">
+            <p className="mt-1.5 text-xs text-red-600 dark:text-red-400">
               {errors.title.message}
             </p>
           )}
@@ -136,11 +136,11 @@ export default function CreateQuizPage() {
 
         {/* Questions Section */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-gray-900">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
               Questions ({fields.length})
             </h2>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <button
                 type="button"
                 onClick={() =>
@@ -150,7 +150,7 @@ export default function CreateQuizPage() {
                     correctAnswer: 'True',
                   })
                 }
-                className="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 shadow-sm transition hover:bg-gray-50"
+                className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 shadow-sm transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-750"
               >
                 + True/False
               </button>
@@ -163,7 +163,7 @@ export default function CreateQuizPage() {
                     correctAnswer: '',
                   })
                 }
-                className="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 shadow-sm transition hover:bg-gray-50"
+                className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 shadow-sm transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-750"
               >
                 + Short Answer
               </button>
@@ -179,7 +179,7 @@ export default function CreateQuizPage() {
                     ],
                   })
                 }
-                className="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 shadow-sm transition hover:bg-gray-50"
+                className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 shadow-sm transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-750"
               >
                 + Multiple Choice
               </button>
@@ -187,7 +187,7 @@ export default function CreateQuizPage() {
           </div>
 
           {errors.questions?.message && (
-            <p className="text-xs text-red-600">
+            <p className="text-xs text-red-600 dark:text-red-400">
               {errors.questions.message}
             </p>
           )}
@@ -210,17 +210,17 @@ export default function CreateQuizPage() {
         </div>
 
         {/* Submit */}
-        <div className="flex items-center justify-end gap-3 border-t border-gray-200 pt-6">
+        <div className="flex items-center justify-end gap-3 border-t border-gray-200 pt-6 dark:border-gray-800">
           <Link
             href="/quizzes"
-            className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-gray-50"
+            className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-750"
           >
             Cancel
           </Link>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="rounded-lg bg-blue-600 px-6 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:opacity-50"
+            className="rounded-md bg-mint-600 px-6 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-mint-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint-600 disabled:opacity-50 dark:bg-mint-600 dark:hover:bg-mint-500"
           >
             {isSubmitting ? 'Creating Quiz...' : 'Create Quiz'}
           </button>
@@ -229,4 +229,3 @@ export default function CreateQuizPage() {
     </div>
   );
 }
-

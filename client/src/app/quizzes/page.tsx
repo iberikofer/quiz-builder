@@ -56,16 +56,16 @@ export default function QuizzesPage() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+          <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-3xl">
             Your Quizzes
           </h1>
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 sm:text-sm">
             Manage and create custom quizzes
           </p>
         </div>
         <Link
           href="/create"
-          className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+          className="inline-flex items-center gap-1.5 rounded-md bg-mint-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-mint-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint-600 dark:bg-mint-600 dark:hover:bg-mint-500"
         >
           <PlusIcon className="h-4 w-4" />
           New Quiz
@@ -73,7 +73,7 @@ export default function QuizzesPage() {
       </div>
 
       {isLocalMode && (
-        <div className="mb-6 flex items-center justify-between rounded-xl border border-amber-200/80 bg-amber-50/70 px-4 py-3 text-xs text-amber-900">
+        <div className="mb-6 flex items-center justify-between rounded-md border border-amber-200/80 bg-amber-50/70 px-4 py-3 text-xs text-amber-900 dark:border-amber-800/50 dark:bg-amber-950/40 dark:text-amber-200">
           <div className="flex items-center gap-2">
             <span className="text-base">🟡</span>
             <span>
@@ -88,44 +88,44 @@ export default function QuizzesPage() {
           {[1, 2, 3].map((n) => (
             <div
               key={n}
-              className="flex h-36 animate-pulse flex-col justify-between rounded-xl border border-gray-200 bg-white p-6 shadow-sm"
+              className="flex h-36 animate-pulse flex-col justify-between rounded-lg border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900"
             >
               <div className="space-y-2.5">
-                <div className="h-5 w-3/4 rounded-md bg-gray-200"></div>
-                <div className="h-4 w-1/2 rounded-md bg-gray-100"></div>
+                <div className="h-5 w-3/4 rounded-md bg-gray-200 dark:bg-gray-800"></div>
+                <div className="h-4 w-1/2 rounded-md bg-gray-100 dark:bg-gray-850"></div>
               </div>
-              <div className="flex items-center justify-between border-t border-gray-100 pt-3">
-                <div className="h-5 w-20 rounded-full bg-gray-200"></div>
-                <div className="h-4 w-16 rounded-md bg-gray-100"></div>
+              <div className="flex items-center justify-between border-t border-gray-100 pt-3 dark:border-gray-800">
+                <div className="h-4 w-20 rounded-md bg-gray-200 dark:bg-gray-800"></div>
+                <div className="h-4 w-16 rounded-md bg-gray-100 dark:bg-gray-850"></div>
               </div>
             </div>
           ))}
         </div>
       ) : error ? (
-        <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-center text-red-600">
+        <div className="rounded-lg border border-red-200 bg-red-50 p-6 text-center text-red-600 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-300">
           <p>{error}</p>
           <button
             onClick={() => fetchQuizzes()}
-            className="mt-4 rounded-md bg-red-100 px-4 py-2 text-sm font-medium hover:bg-red-200"
+            className="mt-4 rounded-md bg-red-100 px-4 py-2 text-sm font-medium hover:bg-red-200 dark:bg-red-900/60 dark:hover:bg-red-900"
           >
             Try Again
           </button>
         </div>
       ) : quizzes.length === 0 ? (
-        <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 bg-white py-20 text-center">
-          <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+        <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-200 bg-white py-16 text-center dark:border-gray-800 dark:bg-gray-900">
+          <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-md bg-mint-50 text-mint-600 dark:bg-mint-950/60 dark:text-mint-400">
             <EmptyQuizIcon className="h-6 w-6" />
           </div>
-          <h3 className="text-base font-semibold text-gray-900">
+          <h3 className="text-base font-semibold text-gray-900 dark:text-white">
             No quizzes yet
           </h3>
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
             Get started by creating your very first quiz!
           </p>
           <div className="mt-6">
             <Link
               href="/create"
-              className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
+              className="inline-flex items-center gap-1.5 rounded-md bg-mint-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-mint-700 dark:bg-mint-600 dark:hover:bg-mint-500"
             >
               <PlusIcon className="h-4 w-4" />
               Create Quiz
@@ -142,4 +142,3 @@ export default function QuizzesPage() {
     </div>
   );
 }
-

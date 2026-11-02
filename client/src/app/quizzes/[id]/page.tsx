@@ -56,21 +56,21 @@ export default function QuizDetailPage() {
   if (isLoading) {
     return (
       <div className="flex h-64 items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-200 border-t-blue-600"></div>
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-200 border-t-mint-600 dark:border-gray-800 dark:border-t-mint-500"></div>
       </div>
     );
   }
 
   if (error || !quiz) {
     return (
-      <div className="rounded-xl border border-gray-200 bg-white p-8 text-center shadow-sm">
-        <h2 className="text-xl font-semibold text-gray-900">Quiz not found</h2>
-        <p className="mt-2 text-sm text-gray-500">
+      <div className="rounded-lg border border-gray-200 bg-white p-8 text-center shadow-sm dark:border-gray-800 dark:bg-gray-900">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Quiz not found</h2>
+        <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
           {error || 'The requested quiz does not exist.'}
         </p>
         <Link
           href="/quizzes"
-          className="mt-6 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
+          className="mt-6 inline-flex items-center gap-2 rounded-md bg-mint-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-mint-700 dark:bg-mint-600 dark:hover:bg-mint-500"
         >
           &larr; Back to Quizzes
         </Link>
@@ -89,23 +89,23 @@ export default function QuizDetailPage() {
       <div className="flex items-center justify-between">
         <Link
           href="/quizzes"
-          className="inline-flex items-center gap-1 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900"
+          className="inline-flex items-center gap-1 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
         >
           &larr; Back to Quizzes
         </Link>
 
         <button
           onClick={handleDelete}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-red-200 bg-white px-3 py-1.5 text-xs font-medium text-red-600 transition-colors hover:bg-red-50"
+          className="inline-flex items-center gap-1.5 rounded-md border border-red-200 bg-white px-3 py-1.5 text-xs font-medium text-red-600 transition-colors hover:bg-red-50 dark:border-red-900/60 dark:bg-gray-900 dark:text-red-400 dark:hover:bg-red-950/40"
         >
           <TrashIcon className="h-4 w-4" />
           Delete Quiz
         </button>
       </div>
 
-      <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-        <h1 className="text-2xl font-bold text-gray-900">{quiz.title}</h1>
-        <div className="mt-2 flex flex-wrap items-center gap-4 text-sm text-gray-500">
+      <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{quiz.title}</h1>
+        <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
           <span>
             {quiz.questions.length}{' '}
             {quiz.questions.length === 1 ? 'question' : 'questions'}
@@ -115,7 +115,7 @@ export default function QuizDetailPage() {
           {(isLocalMode || quiz.id > 100000) && (
             <>
               <span>•</span>
-              <span className="inline-flex items-center gap-1 rounded-md bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-800 border border-amber-200">
+              <span className="inline-flex items-center gap-1 rounded-md bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-800 border border-amber-200 dark:border-amber-800/60 dark:bg-amber-950/60 dark:text-amber-300">
                 🟡 Local Storage
               </span>
             </>
@@ -124,9 +124,9 @@ export default function QuizDetailPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-lg font-semibold text-gray-900">Questions</h2>
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Questions</h2>
         {quiz.questions.length === 0 ? (
-          <div className="rounded-xl border border-dashed border-gray-200 bg-white p-8 text-center text-sm text-gray-500">
+          <div className="rounded-lg border border-dashed border-gray-200 bg-white p-8 text-center text-sm text-gray-500 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400">
             This quiz has no questions.
           </div>
         ) : (
@@ -144,4 +144,3 @@ export default function QuizDetailPage() {
     </div>
   );
 }
-
