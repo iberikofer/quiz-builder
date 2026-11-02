@@ -62,34 +62,22 @@ function Header() {
         </Link>
 
         {/* Navigation & Status Badge */}
-        <div className="flex items-center gap-3">
-          <nav className="flex items-center gap-1 sm:gap-2">
-            <Link href="/" className={linkClass('/', true)}>
-              Home
-            </Link>
-            <Link href="/quizzes" className={linkClass('/quizzes', true)}>
-              Quizzes
-            </Link>
-            <Link href="/create" className={linkClass('/create', false)}>
-              Create Quiz
-            </Link>
-          </nav>
-
-          {/* Status Badge in the Right Corner */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Status Badge to the left of navigation links */}
           <div className="relative" ref={popoverRef}>
             {isLocalMode ? (
               <button
                 type="button"
                 onClick={() => setIsPopoverOpen((prev) => !prev)}
                 className="inline-flex items-center gap-1.5 rounded-full border border-amber-300 bg-amber-50/90 px-2.5 py-1 text-xs font-semibold text-amber-800 shadow-sm transition-all hover:bg-amber-100 hover:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-1"
-                title="Натисніть для деталей про роботу в локальному режимі"
+                title="Натисніть для деталей про роботу в офлайн режимі"
                 aria-expanded={isPopoverOpen}
               >
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75"></span>
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500"></span>
                 </span>
-                <span>Local Mode</span>
+                <span>Offline</span>
               </button>
             ) : (
               <button
@@ -100,13 +88,13 @@ function Header() {
                 aria-expanded={isPopoverOpen}
               >
                 <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-                <span>Cloud Mode</span>
+                <span>Online</span>
               </button>
             )}
 
             {/* Popover Card */}
             {isPopoverOpen && (
-              <div className="absolute right-0 top-full mt-2 w-80 sm:w-96 rounded-2xl border border-gray-200 bg-white p-4 shadow-xl ring-1 ring-black/5 animate-in fade-in zoom-in-95 duration-150 z-50">
+              <div className="fixed inset-x-4 top-16 sm:absolute sm:inset-auto sm:left-0 sm:top-full mt-2 w-auto sm:w-96 rounded-2xl border border-gray-200 bg-white p-4 shadow-xl ring-1 ring-black/5 animate-in fade-in zoom-in-95 duration-150 z-50">
                 <div className="flex items-start justify-between gap-2 border-b border-gray-100 pb-3">
                   <div className="flex items-center gap-2">
                     <span className="flex h-6 w-6 items-center justify-center rounded-full bg-amber-100 text-amber-600 text-xs font-bold">
@@ -114,7 +102,7 @@ function Header() {
                     </span>
                     <div>
                       <h4 className="text-sm font-bold text-gray-900">
-                        {isLocalMode ? 'Локальний режим (Local Mode)' : 'Хмарний режим (Cloud Mode)'}
+                        {isLocalMode ? 'Офлайн режим (Offline)' : 'Онлайн режим (Online)'}
                       </h4>
                       <p className="text-[11px] text-gray-500">
                         {isLocalMode ? "Збереження в пам'ять браузера" : 'Підключено до PostgreSQL / Prisma'}
@@ -176,7 +164,7 @@ function Header() {
                       onClick={() => setLocalMode(false)}
                       className="text-[11px] text-gray-500 hover:text-blue-600 underline text-center"
                     >
-                      Спробувати увімкнути Cloud Mode примусово
+                      Спробувати увімкнути онлайн-режим примусово
                     </button>
                   ) : (
                     <button
@@ -184,13 +172,25 @@ function Header() {
                       onClick={() => setLocalMode(true)}
                       className="text-[11px] text-amber-700 hover:text-amber-900 underline text-center"
                     >
-                      Перемкнути на Local Mode вручну
+                      Перемкнути на офлайн-режим вручну
                     </button>
                   )}
                 </div>
               </div>
             )}
           </div>
+
+          <nav className="flex items-center gap-1 sm:gap-2">
+            <Link href="/" className={linkClass('/', true)}>
+              Home
+            </Link>
+            <Link href="/quizzes" className={linkClass('/quizzes', true)}>
+              Quizzes
+            </Link>
+            <Link href="/create" className={linkClass('/create', false)}>
+              Create Quiz
+            </Link>
+          </nav>
         </div>
       </div>
     </header>
