@@ -32,12 +32,13 @@ A full-stack web platform where users can **create custom quizzes** with various
 
 ### Frontend 💻
 
-- **React 19 & Vite**
+- **Next.js 15 (App Router)**
+- **React 19**
 - **TypeScript**
 - **Tailwind CSS**
-- **React Router DOM**
 - **React Hook Form & Zod**
 - **Axios & React Hot Toast**
+- **Zero-Downtime Local Mode (Browser Storage Fallback)**
 
 ---
 
@@ -45,14 +46,14 @@ A full-stack web platform where users can **create custom quizzes** with various
 
 ```text
 quiz-builder/
-├── client/                # 💻 React.js client application (Vite)
+├── client/                # 💻 Next.js 15 App Router client application
 │   ├── src/
-│   │   ├── components/    # Reusable UI components
-│   │   ├── pages/         # Page views (Home, List, Detail, Create)
-│   │   ├── services/      # Axios API service
+│   │   ├── app/           # Next.js App Router (Layout, Home, Quizzes, Detail, Create)
+│   │   ├── components/    # Reusable UI components & Header
+│   │   ├── context/       # Storage Mode & Offline context
+│   │   ├── services/      # API client & local browser storage fallback
 │   │   ├── types/         # TypeScript interfaces
 │   │   └── validators/    # Client-side form schemas
-│   ├── vercel.json        # Vercel SPA routing configuration
 │   └── .env.example       # Example client environment variables
 ├── server/                # ⚙️ Express.js REST API
 │   ├── prisma/            # Prisma schema, migrations, and seed script

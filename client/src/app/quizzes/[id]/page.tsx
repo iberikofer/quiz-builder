@@ -1,14 +1,20 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import { getQuizById, deleteQuiz } from '../services/api';
-import type { Quiz } from '../types/quiz';
-import QuestionView from '../components/QuestionView';
-import { TrashIcon } from '../assets/svg';
+'use client';
 
-function QuizDetailPage() {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+import { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
+import toast from 'react-hot-toast';
+import { getQuizById, deleteQuiz } from '../../../services/api';
+import type { Quiz } from '../../../types/quiz';
+import QuestionView from '../../../components/QuestionView';
+import { useStorageMode } from '../../../context/StorageModeContext';
+import { TrashIcon } from '../../../assets/svg';
+
+export default function QuizDetailPage() {
+  const params = useParams<{ id: string }>();
+  const id = params?.id;
+  const router = useRouter();
+  const { isLocalMode, refreshLocalCount } = useStorageMode();
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -38,8 +44,9 @@ function QuizDetailPage() {
 
     try {
       await deleteQuiz(quiz.id);
+      refreshLocalCount();
       toast.success('Quiz deleted successfully');
-      navigate('/quizzes');
+      router.push('/quizzes');
     } catch (err: unknown) {
       console.error('Failed to delete quiz', err);
       toast.error('Failed to delete quiz');
@@ -62,7 +69,7 @@ function QuizDetailPage() {
           {error || 'The requested quiz does not exist.'}
         </p>
         <Link
-          to="/quizzes"
+          href="/quizzes"
           className="mt-6 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
         >
           &larr; Back to Quizzes
@@ -81,7 +88,7 @@ function QuizDetailPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <Link
-          to="/quizzes"
+          href="/quizzes"
           className="inline-flex items-center gap-1 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900"
         >
           &larr; Back to Quizzes
@@ -105,6 +112,14 @@ function QuizDetailPage() {
           </span>
           <span>•</span>
           <span>Created on {formattedDate}</span>
+          {(isLocalMode || quiz.id > 100000) && (
+            <>
+              <span>•</span>
+              <span className="inline-flex items-center gap-1 rounded-md bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-800 border border-amber-200">
+                🟡 Local Storage
+              </span>
+            </>
+          )}
         </div>
       </div>
 
@@ -115,13 +130,18 @@ function QuizDetailPage() {
             This quiz has no questions.
           </div>
         ) : (
-          quiz.questions.map((question, index) => (
-            <QuestionView key={question.id} question={question} index={index} />
-          ))
+          <div className="space-y-3">
+            {quiz.questions.map((question, index) => (
+              <QuestionView
+                key={question.id || index}
+                question={question}
+                index={index}
+              />
+            ))}
+          </div>
         )}
       </div>
     </div>
   );
 }
 
-export default QuizDetailPage;

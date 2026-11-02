@@ -1,5 +1,7 @@
+'use client';
+
 import type { QuizListItem } from '../types/quiz';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { TrashIcon, CalendarIcon } from '../assets/svg';
 
 interface QuizCardProps {
@@ -8,7 +10,7 @@ interface QuizCardProps {
 }
 
 function QuizCard({ quiz, onDelete }: QuizCardProps) {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -25,7 +27,7 @@ function QuizCard({ quiz, onDelete }: QuizCardProps) {
 
   return (
     <div
-      onClick={() => navigate(`/quizzes/${quiz.id}`)}
+      onClick={() => router.push(`/quizzes/${quiz.id}`)}
       className="group relative flex cursor-pointer flex-col justify-between rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 ease-out transform-gpu hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md after:absolute after:inset-x-0 after:-bottom-2 after:h-2 after:content-['']"
     >
       <div>
@@ -49,10 +51,10 @@ function QuizCard({ quiz, onDelete }: QuizCardProps) {
           {quiz.questionCount}{' '}
           {quiz.questionCount === 1 ? 'question' : 'questions'}
         </span>
-        <span className="flex items-center gap-1">
-          <CalendarIcon className="h-3.5 w-3.5 text-gray-400" />
-          {formattedDate}
-        </span>
+        <div className="flex items-center gap-1.5 text-gray-400">
+          <CalendarIcon className="h-4 w-4" />
+          <span>{formattedDate}</span>
+        </div>
       </div>
     </div>
   );

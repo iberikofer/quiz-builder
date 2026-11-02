@@ -1,12 +1,16 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import { getQuizzes, deleteQuiz } from '../services/api';
-import type { QuizListItem } from '../types/quiz';
-import QuizCard from '../components/QuizCard';
-import { PlusIcon, EmptyQuizIcon } from '../assets/svg';
+'use client';
 
-function QuizListPage() {
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import toast from 'react-hot-toast';
+import { getQuizzes, deleteQuiz } from '../../services/api';
+import type { QuizListItem } from '../../types/quiz';
+import QuizCard from '../../components/QuizCard';
+import { PlusIcon, EmptyQuizIcon } from '../../assets/svg';
+import { useStorageMode } from '../../context/StorageModeContext';
+
+export default function QuizzesPage() {
+  const { isLocalMode, refreshLocalCount } = useStorageMode();
   const [quizzes, setQuizzes] = useState<QuizListItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -20,10 +24,10 @@ function QuizListPage() {
       setIsLoading(false);
     } catch (err: unknown) {
       console.error(`Failed to fetch quizzes (attempt ${retryCount + 1})`, err);
-      const error = err as { response?: { status?: number }; message?: string };
+      const errObj = err as { response?: { status?: number }; message?: string };
       const isRetryable =
-        error?.response?.status === 502 || error?.message === 'Network Error';
-      if (isRetryable && retryCount < 5) {
+        errObj?.response?.status === 502 || errObj?.message === 'Network Error';
+      if (isRetryable && retryCount < 4) {
         setTimeout(() => fetchQuizzes(retryCount + 1), 1500);
       } else {
         setError('Could not load quizzes. Please try again later.');
@@ -34,12 +38,13 @@ function QuizListPage() {
 
   useEffect(() => {
     fetchQuizzes();
-  }, []);
+  }, [isLocalMode]);
 
   const handleDelete = async (id: number) => {
     try {
       await deleteQuiz(id);
       toast.success('Quiz deleted successfully');
+      refreshLocalCount();
       setQuizzes((prev) => prev.filter((q) => q.id !== id));
     } catch (err: unknown) {
       console.error('Failed to delete quiz', err);
@@ -49,7 +54,7 @@ function QuizListPage() {
 
   return (
     <div>
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-gray-900">
             Your Quizzes
@@ -59,13 +64,24 @@ function QuizListPage() {
           </p>
         </div>
         <Link
-          to="/create"
+          href="/create"
           className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
         >
           <PlusIcon className="h-4 w-4" />
           New Quiz
         </Link>
       </div>
+
+      {isLocalMode && (
+        <div className="mb-6 flex items-center justify-between rounded-xl border border-amber-200/80 bg-amber-50/70 px-4 py-3 text-xs text-amber-900">
+          <div className="flex items-center gap-2">
+            <span className="text-base">🟡</span>
+            <span>
+              <strong>Локальний режим:</strong> Тести завантажено з пам'яті вашого браузера (Local Storage). Усі зміни зберігаються локально.
+            </span>
+          </div>
+        </div>
+      )}
 
       {isLoading ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -100,18 +116,21 @@ function QuizListPage() {
           <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-blue-600">
             <EmptyQuizIcon className="h-6 w-6" />
           </div>
-          <h2 className="text-lg font-semibold text-gray-900">
+          <h3 className="text-base font-semibold text-gray-900">
             No quizzes yet
-          </h2>
+          </h3>
           <p className="mt-1 text-sm text-gray-500">
-            Get started by creating your first quiz.
+            Get started by creating your very first quiz!
           </p>
-          <Link
-            to="/create"
-            className="mt-5 rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-500"
-          >
-            Create Quiz
-          </Link>
+          <div className="mt-6">
+            <Link
+              href="/create"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
+            >
+              <PlusIcon className="h-4 w-4" />
+              Create Quiz
+            </Link>
+          </div>
         </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -124,4 +143,3 @@ function QuizListPage() {
   );
 }
 
-export default QuizListPage;

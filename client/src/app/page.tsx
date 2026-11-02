@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import {
   SearchIcon,
   PlusIcon,
@@ -7,7 +7,7 @@ import {
   ShieldCheckIcon,
 } from '../assets/svg';
 
-function HomePage() {
+export default function HomePage() {
   return (
     <div className="space-y-6 pb-2">
       <section className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 px-6 py-10 text-white shadow-lg sm:px-10 sm:py-12">
@@ -16,7 +16,7 @@ function HomePage() {
 
         <div className="relative z-10 mx-auto max-w-2xl text-center">
           <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-0.5 text-xs font-semibold tracking-wide text-blue-100 backdrop-blur-sm">
-            <span>✨ Fullstack Quiz Platform</span>
+            <span>✨ Fullstack Next.js Quiz Platform</span>
           </div>
 
           <h1 className="text-2xl font-bold tracking-tight text-white sm:text-4xl">
@@ -31,7 +31,7 @@ function HomePage() {
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
             <Link
-              to="/quizzes"
+              href="/quizzes"
               className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-2.5 text-sm font-bold text-blue-700 shadow-md transition-all hover:bg-blue-50 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               <SearchIcon className="h-4 w-4" />
@@ -39,7 +39,7 @@ function HomePage() {
             </Link>
 
             <Link
-              to="/create"
+              href="/create"
               className="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-white/10 px-6 py-2.5 text-sm font-bold text-white backdrop-blur-sm transition-all hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               <PlusIcon className="h-4 w-4" />
@@ -59,46 +59,42 @@ function HomePage() {
           </p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="group relative rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 ease-out transform-gpu hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md after:absolute after:inset-x-0 after:-bottom-2 after:h-2 after:content-[''] sm:p-6">
-            <div className="mb-3.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-md">
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
               <DocumentListIcon className="h-5 w-5" />
             </div>
-            <h3 className="text-base font-semibold text-gray-900 sm:text-lg">
+            <h3 className="text-base font-semibold text-gray-900">
               Multiple Question Types
             </h3>
-            <p className="mt-2.5 text-xs leading-relaxed text-gray-600 sm:text-sm">
-              Build questions with <strong>True/False</strong>,{' '}
-              <strong>Short Answer</strong>, or{' '}
-              <strong>Multiple Choice Checkboxes</strong> with custom options.
+            <p className="mt-1 text-xs leading-relaxed text-gray-500 sm:text-sm">
+              Supports Boolean (True/False), Short Answer Inputs, and Multiple
+              Choice Checkboxes with customizable options.
             </p>
           </div>
 
-          <div className="group relative rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 ease-out transform-gpu hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-md after:absolute after:inset-x-0 after:-bottom-2 after:h-2 after:content-[''] sm:p-6">
-            <div className="mb-3.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 transition-colors group-hover:bg-indigo-600 group-hover:text-white">
+          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-md">
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
               <GridBlocksIcon className="h-5 w-5" />
             </div>
-            <h3 className="text-base font-semibold text-gray-900 sm:text-lg">
-              Interactive Dashboard
+            <h3 className="text-base font-semibold text-gray-900">
+              Inspection Mode
             </h3>
-            <p className="mt-2.5 text-xs leading-relaxed text-gray-600 sm:text-sm">
-              Clean dashboard to manage your quiz collection, see question
-              counts, view creation timestamps, and delete quizzes with cascade
-              cleanup.
+            <p className="mt-1 text-xs leading-relaxed text-gray-500 sm:text-sm">
+              Review correct answers, view clean option breakdowns, and verify
+              quiz logic through a structured layout.
             </p>
           </div>
 
-          <div className="group relative rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 ease-out transform-gpu hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md after:absolute after:inset-x-0 after:-bottom-2 after:h-2 after:content-[''] sm:col-span-2 sm:p-6 lg:col-span-1">
-            <div className="mb-3.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600 transition-colors group-hover:bg-emerald-600 group-hover:text-white">
+          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-md">
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
               <ShieldCheckIcon className="h-5 w-5" />
             </div>
-            <h3 className="text-base font-semibold text-gray-900 sm:text-lg">
-              Full Type-Safety & Validation
+            <h3 className="text-base font-semibold text-gray-900">
+              Zero Downtime Local Mode
             </h3>
-            <p className="mt-2.5 text-xs leading-relaxed text-gray-600 sm:text-sm">
-              End-to-end schema validation powered by <strong>Zod</strong> on
-              both React client and Node.js Express backend with Prisma &
-              PostgreSQL.
+            <p className="mt-1 text-xs leading-relaxed text-gray-500 sm:text-sm">
+              Works seamlessly with local browser storage whenever cloud databases are asleep, maintaining full functionality.
             </p>
           </div>
         </div>
@@ -107,4 +103,3 @@ function HomePage() {
   );
 }
 
-export default HomePage;
