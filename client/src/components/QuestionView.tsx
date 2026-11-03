@@ -8,10 +8,10 @@ interface QuestionViewProps {
 
 function QuestionView({ question, index }: QuestionViewProps) {
   return (
-    <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900 sm:p-6">
+    <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 ease-out hover:border-violet-200 hover:shadow-md dark:border-gray-800 dark:bg-gray-900 dark:hover:border-violet-800/60 sm:p-6">
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
-          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-mint-50 text-xs font-bold text-mint-700 dark:bg-mint-950/60 dark:text-mint-400">
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-violet-50 text-xs font-bold text-violet-700 dark:bg-violet-950/70 dark:text-violet-300">
             {index + 1}
           </span>
           <h3 className="text-base font-semibold text-gray-900 dark:text-white">
@@ -36,9 +36,9 @@ function QuestionView({ question, index }: QuestionViewProps) {
               return (
                 <div
                   key={option}
-                  className={`flex items-center justify-between rounded-md border px-4 py-2.5 text-sm transition ${
+                  className={`flex items-center justify-between rounded-md border px-4 py-2.5 text-sm transition-all duration-150 ${
                     isCorrect
-                      ? 'border-mint-300 bg-mint-50/80 text-mint-950 font-medium dark:border-mint-800/80 dark:bg-mint-950/50 dark:text-mint-200'
+                      ? 'border-violet-300 bg-violet-50/80 text-violet-950 font-medium dark:border-violet-800/80 dark:bg-violet-950/60 dark:text-violet-200'
                       : 'border-gray-200 bg-gray-50/60 text-gray-600 dark:border-gray-800 dark:bg-gray-800/40 dark:text-gray-300'
                   }`}
                 >
@@ -47,12 +47,12 @@ function QuestionView({ question, index }: QuestionViewProps) {
                       type="radio"
                       disabled
                       checked={isCorrect}
-                      className="h-4 w-4 text-mint-600 focus:ring-mint-500 dark:text-mint-400"
+                      className="h-4 w-4 text-violet-600 focus:ring-violet-500 dark:text-violet-400"
                     />
                     <span>{option}</span>
                   </div>
                   {isCorrect && (
-                    <span className="inline-flex items-center gap-1 rounded-md bg-mint-100 px-2 py-0.5 text-xs font-semibold text-mint-800 dark:bg-mint-900/60 dark:text-mint-300">
+                    <span className="inline-flex items-center gap-1 rounded-md bg-violet-100 px-2 py-0.5 text-xs font-semibold text-violet-800 dark:bg-violet-900/70 dark:text-violet-200">
                       <CheckIcon className="h-3.5 w-3.5" />
                       Correct answer
                     </span>
@@ -69,8 +69,8 @@ function QuestionView({ question, index }: QuestionViewProps) {
               User text answer placeholder...
             </div>
             {question.correctAnswer && (
-              <div className="inline-flex items-center gap-2 rounded-md border border-mint-200 bg-mint-50 px-3.5 py-2 text-xs font-medium text-mint-900 dark:border-mint-800/70 dark:bg-mint-950/50 dark:text-mint-200">
-                <span className="font-bold text-mint-700 dark:text-mint-400">
+              <div className="inline-flex items-center gap-2 rounded-md border border-violet-200 bg-violet-50 px-3.5 py-2 text-xs font-medium text-violet-900 dark:border-violet-800/70 dark:bg-violet-950/60 dark:text-violet-200">
+                <span className="font-bold text-violet-700 dark:text-violet-400">
                   Expected answer:
                 </span>
                 <span>{question.correctAnswer}</span>
@@ -85,9 +85,9 @@ function QuestionView({ question, index }: QuestionViewProps) {
               question.options.map((option) => (
                 <div
                   key={option.id}
-                  className={`flex items-center justify-between rounded-md border px-4 py-2.5 text-sm transition ${
+                  className={`flex items-center justify-between rounded-md border px-4 py-2.5 text-sm transition-all duration-150 ${
                     option.isCorrect
-                      ? 'border-mint-300 bg-mint-50/80 text-mint-950 font-medium dark:border-mint-800/80 dark:bg-mint-950/50 dark:text-mint-200'
+                      ? 'border-violet-300 bg-violet-50/80 text-violet-950 font-medium dark:border-violet-800/80 dark:bg-violet-950/60 dark:text-violet-200'
                       : 'border-gray-200 bg-gray-50/60 text-gray-600 dark:border-gray-800 dark:bg-gray-800/40 dark:text-gray-300'
                   }`}
                 >
@@ -96,12 +96,12 @@ function QuestionView({ question, index }: QuestionViewProps) {
                       type="checkbox"
                       disabled
                       checked={option.isCorrect}
-                      className="h-4 w-4 rounded text-mint-600 focus:ring-mint-500 dark:text-mint-400"
+                      className="h-4 w-4 rounded text-violet-600 focus:ring-violet-500 dark:text-violet-400"
                     />
                     <span>{option.text}</span>
                   </div>
                   {option.isCorrect && (
-                    <span className="inline-flex items-center gap-1 rounded-md bg-mint-100 px-2 py-0.5 text-xs font-semibold text-mint-800 dark:bg-mint-900/60 dark:text-mint-300">
+                    <span className="inline-flex items-center gap-1 rounded-md bg-violet-100 px-2 py-0.5 text-xs font-semibold text-violet-800 dark:bg-violet-900/70 dark:text-violet-200">
                       <CheckIcon className="h-3.5 w-3.5" />
                       Correct option
                     </span>

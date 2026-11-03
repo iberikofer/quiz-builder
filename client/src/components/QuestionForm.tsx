@@ -40,14 +40,14 @@ function QuestionForm({
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900 sm:p-6">
       <div className="flex items-center justify-between border-b border-gray-100 pb-3 dark:border-gray-800">
-        <span className="flex h-7 w-7 items-center justify-center rounded-md bg-mint-50 text-xs font-bold text-mint-700 dark:bg-mint-950/60 dark:text-mint-400">
+        <span className="flex h-7 w-7 items-center justify-center rounded-md bg-violet-50 text-xs font-bold text-violet-700 dark:bg-violet-950/70 dark:text-violet-300">
           {index + 1}
         </span>
         {canRemove && (
           <button
             type="button"
             onClick={() => remove(index)}
-            className="text-xs font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300"
+            className="text-xs font-medium text-red-500 transition-all duration-150 hover:text-red-700 active:scale-95 dark:text-red-400 dark:hover:text-red-300"
           >
             Remove Question
           </button>
@@ -77,9 +77,9 @@ function QuestionForm({
                     setValue(`questions.${index}.correctAnswer`, '');
                   }
                 }}
-                className={`rounded-md px-3 py-1.5 text-xs font-semibold transition ${
+                className={`rounded-md px-3 py-1.5 text-xs font-semibold transition-all duration-150 ease-out hover:-translate-y-0.5 active:translate-y-0 active:scale-95 ${
                   watchedType === t.type
-                    ? 'bg-mint-600 text-white shadow-sm dark:bg-mint-600'
+                    ? 'bg-violet-600 text-white shadow-sm dark:bg-violet-600'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
                 }`}
               >
@@ -98,10 +98,10 @@ function QuestionForm({
             type="text"
             placeholder="e.g. Next.js App Router uses Server Components by default."
             {...register(`questions.${index}.text`)}
-            className={`mt-1 block w-full rounded-md border px-3.5 py-2 text-sm transition focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white ${
+            className={`mt-1 block w-full rounded-md border px-3.5 py-2 text-sm transition-all focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white ${
               questionErrors?.text
                 ? 'border-red-300 focus:border-red-500 focus:ring-red-200 dark:border-red-800'
-                : 'border-gray-300 focus:border-mint-500 focus:ring-mint-200 dark:border-gray-700 dark:focus:ring-mint-900'
+                : 'border-gray-300 focus:border-violet-500 focus:ring-violet-200 dark:border-gray-700 dark:focus:ring-violet-900'
             }`}
           />
           {questionErrors?.text && (
@@ -119,13 +119,13 @@ function QuestionForm({
               {['True', 'False'].map((val) => (
                 <label
                   key={val}
-                  className="flex cursor-pointer items-center gap-2 rounded-md border border-gray-200 px-3.5 py-2 text-xs font-medium hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-750"
+                  className="flex cursor-pointer items-center gap-2 rounded-md border border-gray-200 px-3.5 py-2 text-xs font-medium transition-all duration-150 hover:-translate-y-0.5 hover:bg-gray-50 active:scale-98 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-750"
                 >
                   <input
                     type="radio"
                     value={val}
                     {...register(`questions.${index}.correctAnswer`)}
-                    className="text-mint-600 focus:ring-mint-500 dark:text-mint-400"
+                    className="text-violet-600 focus:ring-violet-500 dark:text-violet-400"
                   />
                   <span>{val}</span>
                 </label>
@@ -143,7 +143,7 @@ function QuestionForm({
               type="text"
               placeholder="e.g. Server Component"
               {...register(`questions.${index}.correctAnswer`)}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3.5 py-2 text-sm focus:border-mint-500 focus:outline-none focus:ring-2 focus:ring-mint-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:focus:ring-mint-900"
+              className="mt-1 block w-full rounded-md border border-gray-300 px-3.5 py-2 text-sm transition-all focus:border-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:focus:ring-violet-900"
             />
           </div>
         )}
@@ -157,7 +157,7 @@ function QuestionForm({
               <button
                 type="button"
                 onClick={() => append({ text: '', isCorrect: false })}
-                className="text-xs font-medium text-mint-600 hover:text-mint-700 dark:text-mint-400 dark:hover:text-mint-300"
+                className="text-xs font-medium text-violet-600 transition-all duration-150 hover:text-violet-700 active:scale-95 dark:text-violet-400 dark:hover:text-violet-300"
               >
                 + Add Option
               </button>
@@ -169,20 +169,20 @@ function QuestionForm({
                   <input
                     type="checkbox"
                     {...register(`questions.${index}.options.${optIndex}.isCorrect`)}
-                    className="h-4 w-4 rounded border-gray-300 text-mint-600 focus:ring-mint-500 dark:border-gray-700 dark:bg-gray-800"
+                    className="h-4 w-4 rounded border-gray-300 text-violet-600 focus:ring-violet-500 dark:border-gray-700 dark:bg-gray-800"
                     title="Mark as correct answer"
                   />
                   <input
                     type="text"
                     placeholder={`Option ${optIndex + 1}`}
                     {...register(`questions.${index}.options.${optIndex}.text`)}
-                    className="flex-1 rounded-md border border-gray-300 px-3 py-1.5 text-xs focus:border-mint-500 focus:outline-none focus:ring-2 focus:ring-mint-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:focus:ring-mint-900"
+                    className="flex-1 rounded-md border border-gray-300 px-3 py-1.5 text-xs transition-all focus:border-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:focus:ring-violet-900"
                   />
                   {fields.length > 2 && (
                     <button
                       type="button"
                       onClick={() => removeOption(optIndex)}
-                      className="text-gray-400 hover:text-red-500 p-1 text-xs dark:hover:text-red-400"
+                      className="text-gray-400 hover:text-red-500 active:scale-90 p-1 text-xs transition dark:hover:text-red-400"
                       title="Remove option"
                     >
                       ✕
