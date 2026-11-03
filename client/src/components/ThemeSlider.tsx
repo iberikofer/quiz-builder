@@ -44,7 +44,12 @@ export function ThemeSlider({ className = '' }: { className?: string }) {
       role="switch"
       aria-checked={isDark}
       aria-label="Toggle dark/light theme"
-      onClick={toggleTheme}
+      onMouseDown={(e) => e.stopPropagation()}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleTheme();
+      }}
       className={`group relative inline-flex h-7 w-14 shrink-0 cursor-pointer items-center rounded-full p-1 transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-mint-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900 ${
         isDark
           ? 'border border-mint-700/60 bg-gray-800 hover:bg-gray-750'

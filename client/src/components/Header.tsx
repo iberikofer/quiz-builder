@@ -23,7 +23,8 @@ function Header() {
 
   const headerRef = useRef<HTMLElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const burgerButtonRef = useRef<HTMLDivElement>(null);
+  const mobileDropdownRef = useRef<HTMLDivElement>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Measure header height for precise backdrop positioning below the header
@@ -41,15 +42,19 @@ function Header() {
   // Close menus on click outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as Node;
       if (
         popoverRef.current &&
-        !popoverRef.current.contains(e.target as Node)
+        !popoverRef.current.contains(target)
       ) {
         setIsPopoverOpen(false);
       }
       if (
-        mobileMenuRef.current &&
-        !mobileMenuRef.current.contains(e.target as Node)
+        isMobileMenuOpen &&
+        mobileDropdownRef.current &&
+        !mobileDropdownRef.current.contains(target) &&
+        burgerButtonRef.current &&
+        !burgerButtonRef.current.contains(target)
       ) {
         setIsMobileMenuOpen(false);
       }
@@ -252,47 +257,8 @@ function Header() {
               </Link>
             </nav>
 
-            {/* When burger menu is active/open: Offline badge stays in the header! */}
-            {isMobileMenuOpen && (
-              <div
-                className="relative md:hidden"
-                ref={popoverRef}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                {isLocalMode ? (
-                  <button
-                    type="button"
-                    onClick={handleBadgeClick}
-                    className="inline-flex items-center gap-1.5 rounded-md border border-amber-300 bg-amber-50/90 px-2.5 py-1 text-xs font-semibold text-amber-800 shadow-sm transition-all hover:bg-amber-100 hover:border-amber-400 focus:outline-none dark:border-amber-700/60 dark:bg-amber-950/60 dark:text-amber-300"
-                    title="Offline Mode — saved in browser storage"
-                    aria-expanded={isPopoverOpen}
-                  >
-                    <span className="relative flex h-2 w-2">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75"></span>
-                      <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500"></span>
-                    </span>
-                    <span>Offline</span>
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={handleBadgeClick}
-                    className="inline-flex items-center gap-1.5 rounded-md border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-800 transition-all hover:bg-emerald-100 focus:outline-none dark:border-emerald-800/60 dark:bg-emerald-950/60 dark:text-emerald-300"
-                    title="Online Mode — connected to cloud database"
-                    aria-expanded={isPopoverOpen}
-                  >
-                    <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-                    <span>Online</span>
-                  </button>
-                )}
-
-                {isPopoverOpen && renderPopoverContent('top')}
-              </div>
-            )}
-
             {/* Mobile Hamburger Button (< 769px) */}
-            <div className="relative md:hidden" ref={mobileMenuRef}>
+            <div className="relative md:hidden" ref={burgerButtonRef}>
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen((prev) => !prev)}
@@ -335,46 +301,44 @@ function Header() {
         </div>
       </header>
 
-      {/* Floating Offline Badge in bottom right corner (active whenever burger menu is closed) */}
-      {!isMobileMenuOpen && (
-        <aside
-          ref={popoverRef}
-          aria-label="Database connectivity status"
-          className="fixed bottom-4 right-4 z-40 sm:bottom-5 sm:right-5 print:hidden"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          {isLocalMode ? (
-            <button
-              type="button"
-              onClick={handleBadgeClick}
-              className="group inline-flex items-center gap-2 rounded-full border border-amber-300/90 bg-amber-50/95 px-3 py-1.5 text-xs font-semibold text-amber-900 shadow-lg backdrop-blur-md transition-all duration-200 hover:scale-105 hover:bg-amber-100 hover:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400 dark:border-amber-700/80 dark:bg-amber-950/90 dark:text-amber-200 dark:hover:bg-amber-900/90"
-              title="Offline Mode — saved in browser storage"
-              aria-expanded={isPopoverOpen}
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500"></span>
-              </span>
-              <span>Offline</span>
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={handleBadgeClick}
-              className="group inline-flex items-center gap-2 rounded-full border border-emerald-200/90 bg-emerald-50/95 px-3 py-1.5 text-xs font-medium text-emerald-900 shadow-lg backdrop-blur-md transition-all duration-200 hover:scale-105 hover:bg-emerald-100 focus:outline-none focus:ring-2 focus:ring-emerald-400 dark:border-emerald-800/80 dark:bg-emerald-950/90 dark:text-emerald-200 dark:hover:bg-emerald-900/90"
-              title="Online Mode — connected to cloud database"
-              aria-expanded={isPopoverOpen}
-            >
-              <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-              <span>Online</span>
-            </button>
-          )}
+      {/* Floating Offline Badge in bottom right corner (persists at bottom right on all screens) */}
+      <aside
+        ref={popoverRef}
+        aria-label="Database connectivity status"
+        className="fixed bottom-4 right-4 z-50 sm:bottom-5 sm:right-5 print:hidden"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        {isLocalMode ? (
+          <button
+            type="button"
+            onClick={handleBadgeClick}
+            className="group inline-flex items-center gap-2 rounded-full border border-amber-300/90 bg-amber-50/95 px-3 py-1.5 text-xs font-semibold text-amber-900 shadow-lg backdrop-blur-md transition-all duration-200 hover:scale-105 hover:bg-amber-100 hover:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400 dark:border-amber-700/80 dark:bg-amber-950/90 dark:text-amber-200 dark:hover:bg-amber-900/90"
+            title="Offline Mode — saved in browser storage"
+            aria-expanded={isPopoverOpen}
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500"></span>
+            </span>
+            <span>Offline</span>
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={handleBadgeClick}
+            className="group inline-flex items-center gap-2 rounded-full border border-emerald-200/90 bg-emerald-50/95 px-3 py-1.5 text-xs font-medium text-emerald-900 shadow-lg backdrop-blur-md transition-all duration-200 hover:scale-105 hover:bg-emerald-100 focus:outline-none focus:ring-2 focus:ring-emerald-400 dark:border-emerald-800/80 dark:bg-emerald-950/90 dark:text-emerald-200 dark:hover:bg-emerald-900/90"
+            title="Online Mode — connected to cloud database"
+            aria-expanded={isPopoverOpen}
+          >
+            <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
+            <span>Online</span>
+          </button>
+        )}
 
-          {/* Popover Card floating upwards */}
-          {isPopoverOpen && renderPopoverContent('bottom')}
-        </aside>
-      )}
+        {/* Popover Card floating upwards */}
+        {isPopoverOpen && renderPopoverContent('bottom')}
+      </aside>
 
       {/* Mobile Menu Backdrop: Starts below header, blurring everything EXCEPT the header */}
       {isMobileMenuOpen && (
@@ -389,6 +353,8 @@ function Header() {
       {/* Stretched Mobile Menu with Centered Text */}
       {isMobileMenuOpen && (
         <div
+          ref={mobileDropdownRef}
+          onMouseDown={(e) => e.stopPropagation()}
           style={{ top: `${headerHeight + 8}px` }}
           className="fixed inset-x-3 z-50 rounded-lg border border-gray-200 bg-white p-4 shadow-xl ring-1 ring-black/5 animate-in fade-in zoom-in-95 duration-150 dark:border-gray-800 dark:bg-gray-900 md:hidden"
         >
@@ -396,41 +362,45 @@ function Header() {
             <Link
               href="/"
               onClick={() => setIsMobileMenuOpen(false)}
-              className={`flex items-center justify-center text-center rounded-md px-4 py-3 text-base font-medium transition ${
+              className={`flex items-center justify-center gap-2 text-center rounded-md px-4 py-3 text-base font-medium transition ${
                 pathname === '/'
                   ? 'bg-mint-50 text-mint-700 font-semibold dark:bg-mint-950/60 dark:text-mint-400'
                   : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white'
               }`}
             >
-              Home
+              <span>🏠</span>
+              <span>Home</span>
             </Link>
             <Link
               href="/quizzes"
               onClick={() => setIsMobileMenuOpen(false)}
-              className={`flex items-center justify-center text-center rounded-md px-4 py-3 text-base font-medium transition ${
+              className={`flex items-center justify-center gap-2 text-center rounded-md px-4 py-3 text-base font-medium transition ${
                 pathname === '/quizzes'
                   ? 'bg-mint-50 text-mint-700 font-semibold dark:bg-mint-950/60 dark:text-mint-400'
                   : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white'
               }`}
             >
-              Quizzes
+              <span>📋</span>
+              <span>Quizzes</span>
             </Link>
             <Link
               href="/create"
               onClick={() => setIsMobileMenuOpen(false)}
-              className={`flex items-center justify-center text-center rounded-md px-4 py-3 text-base font-medium transition ${
+              className={`flex items-center justify-center gap-2 text-center rounded-md px-4 py-3 text-base font-medium transition ${
                 pathname === '/create'
                   ? 'bg-mint-50 text-mint-700 font-semibold dark:bg-mint-950/60 dark:text-mint-400'
                   : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-white'
               }`}
             >
-              Create Quiz
+              <span>✨</span>
+              <span>Create Quiz</span>
             </Link>
 
             {/* Theme Switcher below all mobile menu elements */}
             <div className="mt-2 flex items-center justify-between border-t border-gray-100 pt-3 px-3 dark:border-gray-800">
-              <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                Appearance
+              <span className="flex items-center gap-1.5 text-sm font-medium text-gray-600 dark:text-gray-300">
+                <span>🎨</span>
+                <span>Appearance</span>
               </span>
               <ThemeSlider />
             </div>
