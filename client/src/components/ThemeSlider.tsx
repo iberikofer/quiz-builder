@@ -50,9 +50,9 @@ export function ThemeSlider({ className = '' }: { className?: string }) {
         e.stopPropagation();
         toggleTheme();
       }}
-      className={`group relative inline-flex h-7 w-14 shrink-0 cursor-pointer items-center rounded-full p-1 transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-mint-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900 ${
+      className={`group relative inline-flex h-7 w-14 shrink-0 cursor-pointer items-center rounded-full p-1 transition-all duration-200 ease-out active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900 ${
         isDark
-          ? 'border border-mint-700/60 bg-gray-800 hover:bg-gray-750'
+          ? 'border border-violet-700/60 bg-gray-800 hover:bg-gray-750'
           : 'border border-gray-300 bg-gray-200 hover:bg-gray-250'
       } ${className}`}
     >
@@ -70,7 +70,7 @@ export function ThemeSlider({ className = '' }: { className?: string }) {
       {/* Track Moon Icon (visible in light mode as guide) */}
       <span
         className={`pointer-events-none absolute right-1.5 flex items-center justify-center transition-opacity duration-200 ${
-          isDark ? 'opacity-0' : 'opacity-40 text-gray-500'
+          isDark ? 'opacity-0' : 'opacity-40 text-violet-300'
         }`}
       >
         <MoonIcon className="h-3.5 w-3.5" />
@@ -79,9 +79,9 @@ export function ThemeSlider({ className = '' }: { className?: string }) {
       {/* Sliding Knob with active icon */}
       <span
         aria-hidden="true"
-        className={`pointer-events-none inline-flex h-5 w-5 transform items-center justify-center rounded-full shadow-md ring-0 transition duration-200 ease-in-out ${
+        className={`pointer-events-none inline-flex h-5 w-5 transform items-center justify-center rounded-full shadow-md ring-0 transition duration-200 ease-out ${
           isDark
-            ? 'translate-x-7 bg-mint-500 text-white'
+            ? 'translate-x-7 bg-violet-600 text-white'
             : 'translate-x-0 bg-white text-amber-500 shadow-sm'
         }`}
       >

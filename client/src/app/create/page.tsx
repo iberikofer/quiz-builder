@@ -121,10 +121,10 @@ export default function CreateQuizPage() {
             type="text"
             placeholder="e.g. JavaScript Core Concepts"
             {...register('title')}
-            className={`mt-2 block w-full rounded-md border px-4 py-2.5 text-sm transition focus:outline-none focus:ring-2 dark:border-gray-700 dark:bg-gray-800 dark:text-white ${
+            className={`mt-2 block w-full rounded-md border px-4 py-2.5 text-sm transition-all focus:outline-none focus:ring-2 dark:border-gray-700 dark:bg-gray-800 dark:text-white ${
               errors.title
                 ? 'border-red-300 focus:border-red-500 focus:ring-red-200 dark:border-red-800'
-                : 'border-gray-300 focus:border-mint-500 focus:ring-mint-200 dark:focus:ring-mint-900'
+                : 'border-gray-300 focus:border-violet-500 focus:ring-violet-200 dark:focus:ring-violet-900'
             }`}
           />
           {errors.title && (
@@ -150,7 +150,7 @@ export default function CreateQuizPage() {
                     correctAnswer: 'True',
                   })
                 }
-                className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 shadow-sm transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-750"
+                className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 shadow-sm transition-all duration-150 ease-out hover:-translate-y-0.5 hover:bg-gray-50 active:translate-y-0 active:scale-95 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-750"
               >
                 + True/False
               </button>
@@ -163,7 +163,7 @@ export default function CreateQuizPage() {
                     correctAnswer: '',
                   })
                 }
-                className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 shadow-sm transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-750"
+                className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 shadow-sm transition-all duration-150 ease-out hover:-translate-y-0.5 hover:bg-gray-50 active:translate-y-0 active:scale-95 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-750"
               >
                 + Short Answer
               </button>
@@ -179,7 +179,7 @@ export default function CreateQuizPage() {
                     ],
                   })
                 }
-                className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 shadow-sm transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-750"
+                className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 shadow-sm transition-all duration-150 ease-out hover:-translate-y-0.5 hover:bg-gray-50 active:translate-y-0 active:scale-95 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-750"
               >
                 + Multiple Choice
               </button>
@@ -213,14 +213,14 @@ export default function CreateQuizPage() {
         <div className="flex items-center justify-end gap-3 border-t border-gray-200 pt-6 dark:border-gray-800">
           <Link
             href="/quizzes"
-            className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-750"
+            className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition-all duration-150 ease-out hover:bg-gray-50 active:scale-95 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-750"
           >
             Cancel
           </Link>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="rounded-md bg-mint-600 px-6 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-mint-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint-600 disabled:opacity-50 dark:bg-mint-600 dark:hover:bg-mint-500"
+            className="rounded-md bg-violet-600 px-6 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 ease-out hover:-translate-y-0.5 hover:bg-violet-700 hover:shadow-md active:translate-y-0 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 disabled:opacity-50 dark:bg-violet-600 dark:hover:bg-violet-500"
           >
             {isSubmitting ? 'Creating Quiz...' : 'Create Quiz'}
           </button>

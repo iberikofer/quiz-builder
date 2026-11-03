@@ -56,7 +56,7 @@ export default function QuizDetailPage() {
   if (isLoading) {
     return (
       <div className="flex h-64 items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-200 border-t-mint-600 dark:border-gray-800 dark:border-t-mint-500"></div>
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-200 border-t-violet-600 dark:border-gray-800 dark:border-t-violet-500"></div>
       </div>
     );
   }
@@ -70,7 +70,7 @@ export default function QuizDetailPage() {
         </p>
         <Link
           href="/quizzes"
-          className="mt-6 inline-flex items-center gap-2 rounded-md bg-mint-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-mint-700 dark:bg-mint-600 dark:hover:bg-mint-500"
+          className="mt-6 inline-flex items-center gap-2 rounded-md bg-violet-600 px-5 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 ease-out hover:-translate-y-0.5 hover:bg-violet-700 active:translate-y-0 active:scale-95 dark:bg-violet-600 dark:hover:bg-violet-500"
         >
           &larr; Back to Quizzes
         </Link>

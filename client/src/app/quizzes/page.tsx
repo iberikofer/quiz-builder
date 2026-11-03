@@ -65,7 +65,7 @@ export default function QuizzesPage() {
         </div>
         <Link
           href="/create"
-          className="inline-flex items-center gap-1.5 rounded-md bg-mint-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-mint-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint-600 dark:bg-mint-600 dark:hover:bg-mint-500"
+          className="inline-flex items-center gap-1.5 rounded-md bg-violet-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 ease-out hover:-translate-y-0.5 hover:bg-violet-700 hover:shadow-md active:translate-y-0 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 dark:bg-violet-600 dark:hover:bg-violet-500"
         >
           <PlusIcon className="h-4 w-4" />
           New Quiz
@@ -113,7 +113,7 @@ export default function QuizzesPage() {
         </div>
       ) : quizzes.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-200 bg-white py-16 text-center dark:border-gray-800 dark:bg-gray-900">
-          <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-md bg-mint-50 text-mint-600 dark:bg-mint-950/60 dark:text-mint-400">
+          <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-md bg-violet-50 text-violet-700 dark:bg-violet-950/70 dark:text-violet-300">
             <EmptyQuizIcon className="h-6 w-6" />
           </div>
           <h3 className="text-base font-semibold text-gray-900 dark:text-white">
@@ -125,7 +125,7 @@ export default function QuizzesPage() {
           <div className="mt-6">
             <Link
               href="/create"
-              className="inline-flex items-center gap-1.5 rounded-md bg-mint-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-mint-700 dark:bg-mint-600 dark:hover:bg-mint-500"
+              className="inline-flex items-center gap-1.5 rounded-md bg-violet-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 ease-out hover:-translate-y-0.5 hover:bg-violet-700 hover:shadow-md active:translate-y-0 active:scale-95 dark:bg-violet-600 dark:hover:bg-violet-500"
             >
               <PlusIcon className="h-4 w-4" />
               Create Quiz
